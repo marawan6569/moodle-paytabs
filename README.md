@@ -109,5 +109,5 @@ Paytabs payment gateway for moodle
 
 <hr>
 
-## Note: You must have a ssl certificate installed
+## Note: You must have a ssl certificate installed :
   - because Paytabs doesn't retun tran_ref unless you have ssl certificate installed
