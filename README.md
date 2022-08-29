@@ -101,5 +101,13 @@ Paytabs payment gateway for moodle
 ### Just copy link and put it anywhere and users will be able to buy your course and choose  te date
 <hr>
 
-### link is like:
-  https://www.your-moodle-site.com/buy?id=main-course-unique-abbreviation
+### Link is like:
+  - https://www.your-moodle-site.com/buy?id=main-course-unique-abbreviation
+
+### The link takes user to this page to choose date and proceesd to payment:
+<img src="Screenshot.png" alt="Screenshot.png" />
+
+<hr>
+
+## Note: You must have a ssl certificate installed
+  - because Paytabs doesn't retun tran_ref unless you have ssl certificate installed
