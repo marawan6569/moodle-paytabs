@@ -14,8 +14,8 @@ function get_course_id_num($cart_id): string
 }
 
 
-if (key_exists('tran_ref', $_POST)){
-    $trd = $_POST['tran_ref'];
+if (key_exists('tranRef', $_POST)){
+    $trd = $_POST['tranRef'];
 }
 else{
     echo '<center>';
