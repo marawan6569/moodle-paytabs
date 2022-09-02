@@ -30,6 +30,10 @@ $user_full_name = $USER->firstname . ' ' . $USER->lastname;
 $user_email = $USER->email;
 $user_id = $USER->id;
 
+
+$enrolments = check_multi_enrollments(array_keys($courses[$course_id]['dates']));
+
+
 ?>
 
 <html>
@@ -38,28 +42,48 @@ $user_id = $USER->id;
               href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
               rel="stylesheet">
-        <title>Buy <?php echo $course_name ?></title>
+        <title>Buy : <?php echo $course_name ?></title>
     </head>
-    <body>
+    <body style="background-color: #2e3948">
         <div class="container mt-5 pt-5">
-            <div class="row justify-content-center mt-5 pt-5">
-                <h1 class="text-center text-capitalize">Hello <?php echo $user_full_name; ?>!</h1>
-                <h2 class="text-center text-capitalize">You will buy:  <?php echo $course_name; ?></h2>
-                <h3 class="text-center text-capitalize">Please choose a date:</h3>
-                <form class="col-6 mt-3 text-center" method="post" action="pay.php">
-                    <div class="form-floating">
-                        <select class="form-select" name="date" id="floatingSelect">
-                            <?php
-                            foreach ($course_dates as $date) {
-                                echo "<option value='" . $date['idnum'] ."'> from " . $date['start_date'] . ' to ' . $date['end_date'] . "</option>";
+            <div class="row justify-content-center mt-5 pb-5 overflow-hidden" style="background-color: #fff; border-radius: 10px">
+                    <h1 class="text-center p-3 text-capitalize"
+                    style="
+                            background: #187fd3;
+                            color: #fff;"
+                    >
+                        Hello <?php echo $user_full_name; ?>!
+                    </h1>
+                    <h2 class="text-center text-capitalize" style="color:#555;">You will buy:  <?php echo $course_name; ?></h2>
+                    <h3 class="text-center text-capitalize" style="color:#555;">Please choose a date:</h3>
+                    <form class="col-6 mt-3 text-center" method="post" action="pay.php">
+                        <div class="form-floating" >
+                            <select class="form-select" name="date" id="floatingSelect" style="color:#555;">
+                                <?php
+                                foreach ($course_dates as $date) {
+                                    echo "<option value='" . $date['idnum'] ."'> from " . $date['start_date'] . ' to ' . $date['end_date'] . "</option>";
                                 }
-                            ?>
-                        </select>
-                        <label for="floatingSelect">Available dates: </label>
-                    </div>
-                    <input type="text" name="course_id" hidden value="<?php echo $course_id; ?>">
-                    <button type="submit" class="btn btn-success p-2 mt-5">PROCEED TO PAYMENT</button>
-                </form>
+                                ?>
+                            </select>
+                            <label for="floatingSelect">Available dates: </label>
+                        </div>
+                        <input type="text" name="course_id" hidden value="<?php echo $course_id; ?>">
+                        <?php
+                        if ($enrolments):
+                            echo "<br><p class='text-danger'><b>*</b>You are already bought this course before!
+                                     If you are really want to continue press \"PROCEED TO PAYMENT\"
+                                     Or Go To your <a href='../my/courses.php'>courses</a>
+                                  </p>";
+                        endif;
+                        ?>
+                        <button type="submit" class="btn p-3 px-5 mt-5"
+                                style="
+                                background-color: #1DB38C;
+                                color: #fff;
+                                font-weight: bold;
+                            ">
+                            PROCEED TO PAYMENT</button>
+                    </form>
             </div>
         </div>
 
