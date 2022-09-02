@@ -28,3 +28,26 @@ function enroll($idnumber, $userid, $roleid, $enrolmethod = 'manual') {
     }
     return true;
 }
+
+
+function check_enrollment($idnum){
+    global $DB;
+    global $USER;
+    $course = $DB->get_record('course',['idnumber'=> $idnum]);
+    $course_id = $course->id;
+
+    $context = get_context_instance(CONTEXT_COURSE, $course_id, MUST_EXIST);
+    $enrolled = is_enrolled($context, $USER->id, '', true);
+
+    return $enrolled;
+}
+
+function check_multi_enrollments($arr_of_idnumbers){
+    $status = 0;
+    foreach ($arr_of_idnumbers as $idnumber):
+         if (check_enrollment($idnumber)):
+             $status++;
+         endif;
+    endforeach;
+    return $status;
+}
