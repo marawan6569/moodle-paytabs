@@ -36,7 +36,7 @@ function check_enrollment($idnum){
     $course = $DB->get_record('course',['idnumber'=> $idnum]);
     $course_id = $course->id;
 
-    $context = get_context_instance(CONTEXT_COURSE, $course_id, MUST_EXIST);
+    $context = context_course::instance($course_id);
     $enrolled = is_enrolled($context, $USER->id, '', true);
 
     return $enrolled;

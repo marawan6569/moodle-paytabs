@@ -42,23 +42,48 @@ $enrolments = check_multi_enrollments(array_keys($courses[$course_id]['dates']))
               href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
               rel="stylesheet">
+        <style>
+            body
+            {
+                background-color: #2e3948
+            }
+
+            .row
+            {
+                background-color: #fff;
+                border-radius: 10px
+            }
+            .title
+            {
+                background: #187fd3;
+                color: #fff;
+            }
+            .sub-title
+            {
+                color: #555;
+            }
+            #floatingSelect
+            {
+                color: #555;
+            }
+            .submit-btn
+            {
+                background-color: #1DB38C;
+                color: #fff;
+                font-weight: bold;
+            }
+        </style>
         <title>Buy : <?php echo $course_name ?></title>
     </head>
-    <body style="background-color: #2e3948">
+    <body>
         <div class="container mt-5 pt-5">
-            <div class="row justify-content-center mt-5 pb-5 overflow-hidden" style="background-color: #fff; border-radius: 10px">
-                    <h1 class="text-center p-3 text-capitalize"
-                    style="
-                            background: #187fd3;
-                            color: #fff;"
-                    >
-                        Hello <?php echo $user_full_name; ?>!
-                    </h1>
-                    <h2 class="text-center text-capitalize" style="color:#555;">You will buy:  <?php echo $course_name; ?></h2>
-                    <h3 class="text-center text-capitalize" style="color:#555;">Please choose a date:</h3>
+            <div class="row justify-content-center mt-5 pb-5 overflow-hidden">
+                    <h1 class="text-center p-3 text-capitalize title">Hello <?php echo $user_full_name; ?>!</h1>
+                    <h2 class="text-center text-capitalize">You will buy:  <?php echo $course_name; ?></h2>
+                    <h3 class="text-center text-capitalize sub-title">Please choose a date:</h3>
                     <form class="col-6 mt-3 text-center" method="post" action="pay.php">
                         <div class="form-floating" >
-                            <select class="form-select" name="date" id="floatingSelect" style="color:#555;">
+                            <select class="form-select" name="date" id="floatingSelect">
                                 <?php
                                 foreach ($course_dates as $date) {
                                     echo "<option value='" . $date['idnum'] ."'> from " . $date['start_date'] . ' to ' . $date['end_date'] . "</option>";
@@ -76,13 +101,7 @@ $enrolments = check_multi_enrollments(array_keys($courses[$course_id]['dates']))
                                   </p>";
                         endif;
                         ?>
-                        <button type="submit" class="btn p-3 px-5 mt-5"
-                                style="
-                                background-color: #1DB38C;
-                                color: #fff;
-                                font-weight: bold;
-                            ">
-                            PROCEED TO PAYMENT</button>
+                        <button type="submit" class="btn p-3 px-5 mt-5 submit-btn">PROCEED TO PAYMENT</button>
                     </form>
             </div>
         </div>
@@ -90,6 +109,7 @@ $enrolments = check_multi_enrollments(array_keys($courses[$course_id]['dates']))
 
         <script crossorigin="anonymous"
                 integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-                src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+                src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
+        </script>
     </body>
 </html>
