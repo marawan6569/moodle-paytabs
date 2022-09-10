@@ -63,7 +63,7 @@
                     <select class="form-select p-3 m-3" name="course" id="courses">
                         <?php
                             require_once('utils.php');
-                            $courses = get_all_courses();
+                            $courses = get_all_main_courses();
                             foreach ($courses as $course):
                                 echo "<option value='$course->id'>$course->name</option>";
                             endforeach;

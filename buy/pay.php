@@ -1,22 +1,22 @@
 <?php
 
 require_once('../config.php');
-require_once('courses_list.php');
+require_once('utils.php');
 require_once('paytabs.php');
-global $courses;
 global $USER;
-$base_url = 'http://localhost/moodle/'; // yor moodle url
+$base_url = 'http://localhost/moodle/';
 
 
 if (key_exists('course_id', $_POST) and key_exists('date', $_POST)) {
     // course_info
     $course_id = $_POST['course_id'];
-    $course_name = $courses[$course_id]['name'];
-    $course_price = $courses[$course_id]['price'];
-    $course_date = $courses[$_POST['course_id']]['dates'][$_POST['date']];
-    $date_id = $course_date['idnum'];
-    $start_date = $course_date['start_date'];
-    $end_date = $course_date['end_date'];
+    $course = get_main_course($course_id);
+    $course_name = $course->name;
+    $course_price = $course->price;
+    $course_date = get_date_by_idnumber($_POST['date']);
+    $date_id = $course_date->idnumber;
+    $start_date = $course_date->start_date;
+    $end_date = $course_date->end_date;
 
     //  user info
     $user_id = $USER->id;
