@@ -39,10 +39,16 @@ function add_date($id, $start, $end, $course_id): bool
 /**
  * @throws dml_exception
  */
-function get_all_courses(): array
+function get_all_main_courses(): array
 {
     global $DB;
     return $DB->get_records('main_course');
+}
+
+function get_main_course($course_id): array
+{
+    global $DB;
+    return $DB->get_record('main_course', ['course_id'=> $course_id]);
 }
 
 /**

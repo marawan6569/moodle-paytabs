@@ -2,27 +2,30 @@
 
 require_once('../config.php');
 require_once('enroll.php');
-require_once('courses_list.php');
+require('utils.php');
 require_login();
-global $courses;
 
-if (key_exists('id', $_GET)){
+
+if (key_exists('id', $_GET)):
     $course_id =  $_GET['id'];
-}
 
-else{
+else:
     header("Location: ../index.php");
     die();
-}
+endif;
 
-if (key_exists($course_id, $courses)){
-    $course_name = $courses[$course_id]['name'];
-    $course_dates = $courses[$course_id]['dates'];
-}
-else{
+
+// getting course by course_id
+$course = get_main_course($course_id);
+
+if ($course):
+    $course_name = $course->name;
+    $course_dates = get_dates($course->id);
+
+else:
     echo "<h1><b><center>Sorry, there is No Course with the id '$course_id'</center></b></h1>";
     die;
-}
+endif;
 
 global $USER;
 
@@ -30,8 +33,12 @@ $user_full_name = $USER->firstname . ' ' . $USER->lastname;
 $user_email = $USER->email;
 $user_id = $USER->id;
 
+$dates_ids = [];
+foreach ($course_dates as $course_date) {
+    $dates_ids[] = $course_date->idnumber;
+}
 
-$enrolments = check_multi_enrollments(array_keys($courses[$course_id]['dates']));
+$enrolments = check_multi_enrollments($dates_ids);
 
 
 ?>
@@ -86,7 +93,7 @@ $enrolments = check_multi_enrollments(array_keys($courses[$course_id]['dates']))
                             <select class="form-select" name="date" id="floatingSelect">
                                 <?php
                                 foreach ($course_dates as $date) {
-                                    echo "<option value='" . $date['idnum'] ."'> from " . $date['start_date'] . ' to ' . $date['end_date'] . "</option>";
+                                    echo "<option value='" . $date->idnumber ."'> from " . $date->start_date . ' to ' . $date->end_date . "</option>";
                                 }
                                 ?>
                             </select>

@@ -1,7 +1,7 @@
 <?php require_once('../../config.php'); require_admin();?>
 <?php
 require_once('utils.php');
-$main_courses = get_all_courses();
+$main_courses = get_all_main_courses();
 ?>
 
 <!doctype html>
